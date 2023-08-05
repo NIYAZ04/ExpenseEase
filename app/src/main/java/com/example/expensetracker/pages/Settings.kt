@@ -5,8 +5,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.shapes
 import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Shapes
@@ -15,6 +17,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontVariation
 import com.example.expensetracker.ui.theme.TopAppBarBackground
 
@@ -24,6 +27,7 @@ import androidx.navigation.NavController
 import com.example.expensetracker.Components.TableRow
 
 import com.example.expensetracker.ui.theme.BackgroundElevated
+import com.example.expensetracker.ui.theme.DividerColor
 import com.example.expensetracker.ui.theme.TopAppBarBackground
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,14 +39,22 @@ fun Settings(navController: NavController){
         },
         content = {innerPadding->
             Column(modifier= Modifier.padding(innerPadding)) {
-                Column ( modifier=Modifier
-                    .padding(16.dp)
-                    .clip(MaterialTheme.shapes.medium)
+                Column ( modifier= Modifier
+                    .padding(horizontal = 16.dp)
+                    .clip(shapes.large)
                     .fillMaxWidth()
                     .background(BackgroundElevated)
                 ){
-                    TableRow("Categories",hasArrow = true)
-                    TableRow("Erase all Data", isDestructive = true)
+                    TableRow("Categories",hasArrow = true, onCLick = {_->
+                        run {
+                            navController.navigate("Settings/Categories")
+                        }
+                    })
+                    Divider(
+                        modifier = Modifier
+                            .padding(start = 1.dp), thickness = 1.dp, color = DividerColor
+                    )
+                    TableRow("Erase Data", isDestructive = true, onCLick = {})
                 }
             }
         }

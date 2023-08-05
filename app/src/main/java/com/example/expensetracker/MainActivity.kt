@@ -26,6 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.expensetracker.pages.Expenses
 import com.example.expensetracker.pages.Settings
 import com.example.expensetracker.ui.theme.ExpenseTrackerTheme
+import com.example.expensetracker.ui.theme.TopAppBarBackground
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -39,7 +40,7 @@ class MainActivity : ComponentActivity() {
 
                 Scaffold(
                     bottomBar = {
-                        NavigationBar {
+                        NavigationBar (containerColor = TopAppBarBackground){
                             NavigationBarItem(
                                 selected = backStackEntry.value?.destination?.route =="expenses",
                                 onClick = { navController.navigate("expenses") },
@@ -83,7 +84,7 @@ class MainActivity : ComponentActivity() {
 
                                 )
                             NavigationBarItem(
-                                selected = backStackEntry.value?.destination?.route =="Settings",
+                                selected = backStackEntry.value?.destination?.route?.startsWith("Settings") ?:false ,
                                 onClick = { navController.navigate("Settings") },
                                 label = {
                                     Text("Setting")

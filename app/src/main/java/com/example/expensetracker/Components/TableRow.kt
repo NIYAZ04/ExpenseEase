@@ -1,6 +1,7 @@
 package com.example.expensetracker.Components
 
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,14 +22,19 @@ import com.example.expensetracker.ui.theme.TextPrimary
 
 
 @Composable
-fun TableRow(label:String,hasArrow:Boolean = false,isDestructive:Boolean = false){
+fun TableRow(label:String,onCLick:(String)->Unit,hasArrow:Boolean = false,isDestructive:Boolean = false){
     val textColor = if (isDestructive ) Destructive else TextPrimary
 
-    Row (modifier=Modifier.fillMaxWidth() .padding(horizontal =16.dp, vertical = 10.dp), horizontalArrangement = Arrangement.SpaceBetween
+    Row (modifier=Modifier.fillMaxWidth()
+        .clickable {onCLick(label)}
+        .padding(horizontal =16.dp,
+            vertical = 10.dp),
+
+        horizontalArrangement = Arrangement.SpaceBetween
 
     )
     {
-        Text(text = label, style = MaterialTheme.typography.bodyMedium)
+        Text(text = label, style = MaterialTheme.typography.bodyMedium,color=textColor)
 
         if(hasArrow)
         {
