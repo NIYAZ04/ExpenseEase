@@ -1,7 +1,9 @@
 package com.example.expensetracker.pages
 
 import android.graphics.drawable.shapes.Shape
+import android.icu.text.CaseMap.Title
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -32,29 +34,38 @@ import com.example.expensetracker.ui.theme.TopAppBarBackground
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Settings(navController: NavController){
-    Scaffold (
+    Scaffold(
         topBar = {
-            MediumTopAppBar(title = { Text( "Settings") }, colors = TopAppBarDefaults
-                .mediumTopAppBarColors(containerColor = TopAppBarBackground))
+            MediumTopAppBar(
+                title = { Text("Settings") },
+                colors = TopAppBarDefaults.mediumTopAppBarColors(
+                    containerColor = TopAppBarBackground
+                )
+            )
         },
         content = {innerPadding->
-            Column(modifier= Modifier.padding(innerPadding)) {
+            Column(modifier= Modifier.padding(innerPadding))
+            {
                 Column ( modifier= Modifier
                     .padding(horizontal = 16.dp)
                     .clip(shapes.large)
                     .fillMaxWidth()
                     .background(BackgroundElevated)
-                ){
-                    TableRow("Categories",hasArrow = true, onCLick = {_->
-                        run {
-                            navController.navigate("Settings/Categories")
-                        }
-                    })
+                )
+                {
+
+                    TableRow("Categories",hasArrow = true, modifier = Modifier.clickable
+                    {
+
+                        navController.navigate("Settings/Categories")
+                    }
+                    )
+
                     Divider(
                         modifier = Modifier
                             .padding(start = 1.dp), thickness = 1.dp, color = DividerColor
                     )
-                    TableRow("Erase Data", isDestructive = true, onCLick = {})
+                    TableRow("Erase Data", isDestructive = true)
                 }
             }
         }

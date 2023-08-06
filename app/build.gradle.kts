@@ -15,7 +15,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
+        vectorDrawables{
             useSupportLibrary = true
         }
     }
@@ -23,7 +23,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
+            proguardFiles (
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
@@ -68,7 +68,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     // Dependencies added by Mir Niyazul Haque
-
     // Navigation Dependency
+
     implementation("androidx.navigation:navigation-compose:2.6.0")
 }

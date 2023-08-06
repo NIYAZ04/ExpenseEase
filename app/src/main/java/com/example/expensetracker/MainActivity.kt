@@ -23,6 +23,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.expensetracker.pages.Add
 import com.example.expensetracker.pages.Expenses
 import com.example.expensetracker.pages.Settings
 import com.example.expensetracker.ui.theme.ExpenseTrackerTheme
@@ -133,7 +134,7 @@ class MainActivity : ComponentActivity() {
                                         .fillMaxSize()
                                         .padding(innerPadding)
                                 ) {
-                                    Greeting(name = "add")
+                                   Add( navController)
                                 }
                             }
 
