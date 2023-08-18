@@ -1,6 +1,10 @@
+
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+
 }
 
 android {
@@ -69,9 +73,20 @@ dependencies {
 
 
     // Dependencies added by Mir_Niyazul_Haque
-    // Navigation Dependency
+
+
+    // For Navigation
 
     implementation("androidx.navigation:navigation-compose:2.6.0")
-
+    // marsseleng ->For Calender
     implementation("com.marosseleng.android:compose-material3-datetime-pickers:0.6.0")
+    // skydoves ->For Color Picker
+    implementation ("com.github.skydoves:colorpicker-compose:1.0.0")
+    // Dependencies by Raashna Krishn
+
+    // Align versions of all Kotlin components
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
+
+
 }
+

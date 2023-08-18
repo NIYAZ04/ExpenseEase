@@ -21,11 +21,9 @@ import com.example.expensetracker.R
 import com.example.expensetracker.ui.theme.Destructive
 import com.example.expensetracker.ui.theme.TextPrimary
 
-
-
-
 @Composable
-fun TableRow(label:String, modifier:Modifier=Modifier, hasArrow:Boolean = false, isDestructive:Boolean = false, content:(@Composable RowScope.()-> Unit)?=null){
+fun TableRow( modifier:Modifier=Modifier,label:String ? =null, hasArrow:Boolean = false, isDestructive:Boolean = false, detailcontent:(@Composable RowScope.()-> Unit)?=null,
+              content:(@Composable RowScope.()-> Unit)?=null){
 
     val textColor = if (isDestructive ) Destructive else TextPrimary
 
@@ -35,9 +33,15 @@ fun TableRow(label:String, modifier:Modifier=Modifier, hasArrow:Boolean = false,
         verticalAlignment = Alignment.CenterVertically,
 
     )
-    {
-        Text(text = label, style =typography.bodyMedium,color=textColor
+    {if(label!=null){
+        Text(text = label,
+            style =typography.bodyMedium,
+            color=textColor
             ,modifier=Modifier.padding( vertical = 10.dp))
+    }
+if(content !=null){
+    content()
+}
 
         if(hasArrow)
         {
@@ -48,8 +52,8 @@ fun TableRow(label:String, modifier:Modifier=Modifier, hasArrow:Boolean = false,
             )
         }
 
-        if(content!=null){
-         content()
+        if(detailcontent!=null){
+            detailcontent()
         }
 
     }//Row Composable Ending

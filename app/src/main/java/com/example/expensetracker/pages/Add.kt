@@ -103,49 +103,49 @@ fun Add(navController:NavController, vm: AddViewModel= viewModel())
                     .clip(MaterialTheme.shapes.large)
                     .fillMaxWidth()
                     .background(BackgroundElevated)
-                ){
-                    TableRow("Amount"){  
-
-
-                        UnstyledTextField(value =state.amount,
-                            onValueChange =vm::setAmount,
-                            modifier=Modifier.fillMaxWidth() ,
-                            placeholder={ Text(text = "0")},
-                            arrangement=Arrangement.End,
-                            maxLines=1,
+                ) {
+                    TableRow(label = "Amount", detailcontent = {
+                        UnstyledTextField(
+                            value = state.amount,
+                            onValueChange = vm::setAmount,
+                            modifier = Modifier.fillMaxWidth(),
+                            placeholder = { Text(text = "0") },
+                            arrangement = Arrangement.End,
+                            maxLines = 1,
                             textStyle = TextStyle(
                                 textAlign = TextAlign.Right
                             ),
-                           keyboardOptions = KeyboardOptions(
-                               keyboardType = KeyboardType.Number
-                           )
+                            keyboardOptions = KeyboardOptions(
+                                keyboardType = KeyboardType.Number
+                            )
 
                         )
-                    }
+                    })
                     Divider(
                         modifier = Modifier
                             .padding(start = 1.dp), thickness = 1.dp, color = DividerColor
                     )
-                    TableRow("Recurrence"){
-                        var recurrenceMenuOpened by remember{mutableStateOf(false)}
+                    TableRow(label = "Recurrence", detailcontent = {
+                        var recurrenceMenuOpened by remember { mutableStateOf(false) }
 
-                        TextButton(onClick = { recurrenceMenuOpened=true }, shape = Shapes.large
+                        TextButton(
+                            onClick = { recurrenceMenuOpened = true }, shape = Shapes.large
 
                         )
                         {
                             Text(state.recurrence?.name ?: Recurrence.None.name)
-                            DropdownMenu(expanded =recurrenceMenuOpened ,
-                                onDismissRequest = {recurrenceMenuOpened=false }
+                            DropdownMenu(expanded = recurrenceMenuOpened,
+                                onDismissRequest = { recurrenceMenuOpened = false }
                             )
                             {
-                                recurrences.forEach{recurrence->
+                                recurrences.forEach { recurrence ->
 
                                     DropdownMenuItem(
-                                        text = { Text(recurrence.name)},
+                                        text = { Text(recurrence.name) },
 
                                         onClick = {
-                                          vm.setRecurrence(recurrence)
-                                            recurrenceMenuOpened= false
+                                            vm.setRecurrence(recurrence)
+                                            recurrenceMenuOpened = false
 
 
                                         }
@@ -154,54 +154,60 @@ fun Add(navController:NavController, vm: AddViewModel= viewModel())
                                 }
 
 
-
                             }
                         }
                     }
+                    )
+
 
                     Divider(
                         modifier = Modifier
                             .padding(start = 1.dp), thickness = 1.dp, color = DividerColor
                     )
-                    var datePickerShowing by remember{
+                    var datePickerShowing by remember {
                         mutableStateOf(false)
                     }
-                    TableRow("Date"){
-
-                        TextButton(onClick = {datePickerShowing=true}) {
+                    TableRow(label = "Date", detailcontent = {
+                        TextButton(onClick = { datePickerShowing = true }) {
                             Text(state.date.toString())
 
-                       }
-                      if(datePickerShowing){
+                        }
+                        if (datePickerShowing) {
 
-                          DatePickerDialog(
-                              onDismissRequest = { datePickerShowing = false},
-                              onDateChange = {
-                                             it->
-                                  vm.setDate(it)
-                                  datePickerShowing = false
-                              },
-                              initialDate =state.date,
-                              title = { Text(text = "Select a Date", style = MaterialTheme.typography.titleLarge)}
-                          )
-                      }
+                            DatePickerDialog(
+                                onDismissRequest = { datePickerShowing = false },
+                                onDateChange = { it ->
+                                    vm.setDate(it)
+                                    datePickerShowing = false
+                                },
+                                initialDate = state.date,
+                                title = {
+                                    Text(
+                                        text = "Select a Date",
+                                        style = MaterialTheme.typography.titleLarge
+                                    )
+                                }
+                            )
+                        }
+                    })
 
 
-                    }
+
+
+
 
                     Divider(
                         modifier = Modifier
                             .padding(start = 1.dp), thickness = 1.dp, color = DividerColor
                     )
-                    TableRow("Note"){
-
+                    TableRow(label = "Note", detailcontent = {
                         UnstyledTextField(
                             value = state.note,
-                            placeholder={ Text(text = "Add some Notes")},
-                            arrangement=Arrangement.End,
-                            onValueChange =vm::setNote,
+                            placeholder = { Text(text = "Add some Notes") },
+                            arrangement = Arrangement.End,
+                            onValueChange = vm::setNote,
 
-                            modifier=Modifier.fillMaxWidth() ,
+                            modifier = Modifier.fillMaxWidth(),
                             textStyle = TextStyle(
                                 textAlign = TextAlign.Right
                             ),
@@ -210,19 +216,18 @@ fun Add(navController:NavController, vm: AddViewModel= viewModel())
                             )
 
                         )
-                    }
+                    })
 
                     Divider(
                         modifier = Modifier
                             .padding(start = 1.dp), thickness = 1.dp, color = DividerColor
                     )
-                    TableRow("Category"){
-
+                    TableRow(label = "Category", detailcontent = {
                         var categoriesMenuOpened by remember{mutableStateOf(false)}
 
                         TextButton(onClick = { categoriesMenuOpened=true }, shape = Shapes.large
 
-                        )
+                        )// error might contain
                         {
                             Text(state.category ?:"Select a Category ")
                             DropdownMenu(expanded =categoriesMenuOpened ,
@@ -236,17 +241,17 @@ fun Add(navController:NavController, vm: AddViewModel= viewModel())
                                         text = {
                                             Row (verticalAlignment = Alignment.CenterVertically){
                                                 Surface (modifier=Modifier.size(10.dp),shape= CircleShape,color= Primary){}
-                                                    Text(category,modifier=Modifier.padding(start = 8.dp))
+                                                Text(category,modifier=Modifier.padding(start = 8.dp))
 
 
 
 
                                             }
 
-                                               },
+                                        },
 
                                         onClick = {
-                                          vm.setCategory(category)
+                                            vm.setCategory(category)
                                             categoriesMenuOpened= false
 
 
@@ -260,6 +265,10 @@ fun Add(navController:NavController, vm: AddViewModel= viewModel())
                             }
                         }
                     }
+                    )
+
+
+
                 }
             
             Button(onClick = { /*TODO*/ },

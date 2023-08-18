@@ -54,7 +54,7 @@ fun Settings(navController: NavController){
                 )
                 {
 
-                    TableRow("Categories",hasArrow = true, modifier = Modifier.clickable
+                    TableRow(label="Categories",hasArrow = true, modifier = Modifier.clickable
                     {
 
                         navController.navigate("Settings/Categories")
@@ -65,7 +65,7 @@ fun Settings(navController: NavController){
                         modifier = Modifier
                             .padding(start = 1.dp), thickness = 1.dp, color = DividerColor
                     )
-                    TableRow("Erase Data", isDestructive = true)
+                    TableRow(label="Erase Data", isDestructive = true)
                 }
             }
         }
