@@ -1,10 +1,5 @@
 package com.example.expensetracker.pages
-// Mir Niyazul Haque
-// This app is going to Rock !!
-import android.app.DatePickerDialog
-import android.os.Build
 
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,10 +8,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
+
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
+
 import androidx.compose.material3.Divider
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -27,7 +22,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
+
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -39,13 +34,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
+
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.DialogProperties
+
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -60,16 +55,11 @@ import com.example.expensetracker.ui.theme.Shapes
 import com.example.expensetracker.ui.theme.TopAppBarBackground
 import com.example.expensetracker.viewmodels.AddViewModel
 import com.marosseleng.compose.material3.datetimepickers.date.ui.dialog.DatePickerDialog
-import java.time.LocalDate
-import java.util.Calendar
-import kotlin.math.roundToInt
-
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun Add(navController:NavController, vm: AddViewModel= viewModel())
 { // For Recurrence Tab
-
     val state by vm.uiState.collectAsState()
     val recurrences = listOf(
         Recurrence.None,
@@ -78,7 +68,6 @@ fun Add(navController:NavController, vm: AddViewModel= viewModel())
         Recurrence.Monthly,
         Recurrence.Yearly
     )
-
     // For Category Tab
     val categories = listOf(
         "Groceries",
@@ -158,9 +147,7 @@ fun Add(navController:NavController, vm: AddViewModel= viewModel())
                         }
                     }
                     )
-
-
-                    Divider(
+              Divider(
                         modifier = Modifier
                             .padding(start = 1.dp), thickness = 1.dp, color = DividerColor
                     )
@@ -190,12 +177,6 @@ fun Add(navController:NavController, vm: AddViewModel= viewModel())
                             )
                         }
                     })
-
-
-
-
-
-
                     Divider(
                         modifier = Modifier
                             .padding(start = 1.dp), thickness = 1.dp, color = DividerColor
@@ -206,7 +187,6 @@ fun Add(navController:NavController, vm: AddViewModel= viewModel())
                             placeholder = { Text(text = "Add some Notes") },
                             arrangement = Arrangement.End,
                             onValueChange = vm::setNote,
-
                             modifier = Modifier.fillMaxWidth(),
                             textStyle = TextStyle(
                                 textAlign = TextAlign.Right
@@ -242,53 +222,35 @@ fun Add(navController:NavController, vm: AddViewModel= viewModel())
                                             Row (verticalAlignment = Alignment.CenterVertically){
                                                 Surface (modifier=Modifier.size(10.dp),shape= CircleShape,color= Primary){}
                                                 Text(category,modifier=Modifier.padding(start = 8.dp))
-
-
-
-
                                             }
 
                                         },
-
                                         onClick = {
                                             vm.setCategory(category)
                                             categoriesMenuOpened= false
-
 
                                         }
 
                                     )
                                 }
 
-
-
                             }
                         }
                     }
                     )
-
-
-
                 }
             
             Button(onClick = { /*TODO*/ },
                 modifier=Modifier.padding(16.dp),
                 shape = Shapes.large
-
             )
             {
                 Text(text = "Submit")
             }
             }
-            
         }
     )
-
 }
-
-
-
-
 @Preview(showBackground = true)
 @Composable
 fun AddPreview(){

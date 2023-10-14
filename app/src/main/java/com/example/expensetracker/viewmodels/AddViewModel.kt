@@ -20,8 +20,6 @@ class AddViewModel: ViewModel (){
     private val _uiState = MutableStateFlow(AddScreenState())
     val uiState:StateFlow<AddScreenState> = _uiState.asStateFlow()
 
-
-
     fun setAmount(amount:String){
         _uiState.update { currentState->
             currentState.copy(
@@ -29,7 +27,6 @@ class AddViewModel: ViewModel (){
             )
         }
     }
-
     fun setRecurrence(recurrence:Recurrence){
         _uiState.update { currentState->
             currentState.copy(
@@ -37,8 +34,6 @@ class AddViewModel: ViewModel (){
             )
         }
     }
-
-
     fun setDate(date:LocalDate){
         _uiState.update { currentState->
             currentState.copy(
@@ -60,10 +55,7 @@ class AddViewModel: ViewModel (){
             )
         }
     }
-
     fun submitExpense(){
 
     }
-
-
 }// end

@@ -1,4 +1,3 @@
-
 import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 
 plugins {
@@ -70,22 +69,25 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation ("androidx.compose.material3:material3:1.0.1")
+
 
 
     // Dependencies added by Mir_Niyazul_Haque
 
-
+    // for Swipable
+    implementation ("me.saket.swipe:swipe:1.0.0")
     // For Navigation
-
     implementation("androidx.navigation:navigation-compose:2.6.0")
     // marsseleng ->For Calender
     implementation("com.marosseleng.android:compose-material3-datetime-pickers:0.6.0")
     // skydoves ->For Color Picker
     implementation ("com.github.skydoves:colorpicker-compose:1.0.0")
     // Dependencies by Raashna Krishn
-
     // Align versions of all Kotlin components
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
+
+
 
 
 }

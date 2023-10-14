@@ -53,14 +53,12 @@ fun Settings(navController: NavController){
                     .background(BackgroundElevated)
                 )
                 {
-
                     TableRow(label="Categories",hasArrow = true, modifier = Modifier.clickable
                     {
 
                         navController.navigate("Settings/Categories")
                     }
                     )
-
                     Divider(
                         modifier = Modifier
                             .padding(start = 1.dp), thickness = 1.dp, color = DividerColor

@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.expensetracker.ui.theme.TopAppBarBackground
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Expenses(navController: NavController, name : String){
@@ -31,11 +30,7 @@ fun Expenses(navController: NavController, name : String){
             }
         }
     )
-
-
 }
-
-
 
 @Preview
 @Composable
