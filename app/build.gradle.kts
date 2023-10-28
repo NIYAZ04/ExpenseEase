@@ -3,8 +3,10 @@ import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-
+    id ("kotlin-kapt")
+    id("com.google.devtools.ksp")
 }
+
 
 android {
     namespace = "com.example.expensetracker"
@@ -75,6 +77,8 @@ dependencies {
 
     // Dependencies added by Mir_Niyazul_Haque
 
+    //Faker instanse
+    implementation ("io.github.serpro69:kotlin-faker:1.13.0")
     // for Swipable
     implementation ("me.saket.swipe:swipe:1.0.0")
     // For Navigation
@@ -83,10 +87,19 @@ dependencies {
     implementation("com.marosseleng.android:compose-material3-datetime-pickers:0.6.0")
     // skydoves ->For Color Picker
     implementation ("com.github.skydoves:colorpicker-compose:1.0.0")
-    // Dependencies by Raashna Krishn
+
     // Align versions of all Kotlin components
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 
+//room
+
+
+    implementation("androidx.room:room-runtime:2.5.0")
+    annotationProcessor("androidx.room:room-compiler:2.5.0")
+
+    implementation("androidx.room:room-ktx:2.5.0")
+    kapt("androidx.room:room-compiler:2.5.0")
+    ksp("androidx.room:room-compiler:2.5.0")
 
 
 

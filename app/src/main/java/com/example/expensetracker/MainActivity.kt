@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContent {
             ExpenseTrackerTheme {
-              val navController = rememberNavController()
+                val navController = rememberNavController()
                 val backStackEntry by navController.currentBackStackEntryAsState()
 
                 var showButtomBar by rememberSaveable { mutableStateOf(true) }
@@ -49,72 +49,72 @@ class MainActivity : ComponentActivity() {
                 }
                 Scaffold(
                     bottomBar = {
-                     if(showButtomBar) {
-                         NavigationBar(containerColor = TopAppBarBackground) {
-                             NavigationBarItem(
-                                 selected = backStackEntry?.destination?.route == "expenses",
-                                 onClick = { navController.navigate("expenses") },
-                                 label = {
-                                     Text("Expenses")
-                                 },
-                                 icon = {
-                                     Icon(
-                                         painterResource(id = R.drawable.upload),
-                                         contentDescription = "Upload"
-                                     )
-                                 },
+                        if(showButtomBar) {
+                            NavigationBar(containerColor = TopAppBarBackground) {
+                                NavigationBarItem(
+                                    selected = backStackEntry?.destination?.route == "expenses",
+                                    onClick = { navController.navigate("expenses") },
+                                    label = {
+                                        Text("Expenses")
+                                    },
+                                    icon = {
+                                        Icon(
+                                            painterResource(id = R.drawable.upload),
+                                            contentDescription = "Upload"
+                                        )
+                                    },
 
-                                 )
-                             NavigationBarItem(
-                                 selected = backStackEntry?.destination?.route == "reports",
-                                 onClick = { navController.navigate("reports") },
-                                 label = {
-                                     Text("Chart")
-                                 },
-                                 icon = {
-                                     Icon(
-                                         painterResource(id = R.drawable.bar_chart),
-                                         contentDescription = "Barchart"
-                                     )
-                                 },
+                                    )
+                                NavigationBarItem(
+                                    selected = backStackEntry?.destination?.route == "reports",
+                                    onClick = { navController.navigate("reports") },
+                                    label = {
+                                        Text("Chart")
+                                    },
+                                    icon = {
+                                        Icon(
+                                            painterResource(id = R.drawable.bar_chart),
+                                            contentDescription = "Barchart"
+                                        )
+                                    },
 
-                                 )
-                             NavigationBarItem(
-                                 selected = backStackEntry?.destination?.route == "add",
-                                 onClick = { navController.navigate("add") },
-                                 label = {
-                                     Text("Add")
-                                 },
-                                 icon = {
-                                     Icon(
-                                         painterResource(id = R.drawable.add),
-                                         contentDescription = "add"
-                                     )
-                                 },
+                                    )
+                                NavigationBarItem(
+                                    selected = backStackEntry?.destination?.route == "add",
+                                    onClick = { navController.navigate("add") },
+                                    label = {
+                                        Text("Add")
+                                    },
+                                    icon = {
+                                        Icon(
+                                            painterResource(id = R.drawable.add),
+                                            contentDescription = "add"
+                                        )
+                                    },
 
-                                 )
-                             NavigationBarItem(
-                                 selected = backStackEntry?.destination?.route?.startsWith("Settings")
-                                     ?: false,
-                                 onClick = { navController.navigate("Settings") },
-                                 label = {
-                                     Text("Setting")
-                                 },
-                                 icon = {
-                                     Icon(
-                                         painterResource(id = R.drawable.setting_outlined),
-                                         contentDescription = "Settings"
-                                     )
-                                 },
+                                    )
+                                NavigationBarItem(
+                                    selected = backStackEntry?.destination?.route?.startsWith("Settings")
+                                        ?: false,
+                                    onClick = { navController.navigate("Settings") },
+                                    label = {
+                                        Text("Setting")
+                                    },
+                                    icon = {
+                                        Icon(
+                                            painterResource(id = R.drawable.setting_outlined),
+                                            contentDescription = "Settings"
+                                        )
+                                    },
 
-                                 )
+                                    )
 
-                         }
-                     }
+                            }
+                        }
 
                     },
                     content = { innerPadding ->
-                        
+
                         NavHost(navController = navController,
                             startDestination = "expenses"
                         ){
@@ -125,7 +125,7 @@ class MainActivity : ComponentActivity() {
                                         .fillMaxSize()
                                         .padding(innerPadding)
                                 ) {
-                             Expenses(navController = navController, name ="expenses" )
+                                    Expenses(navController = navController )
                                 }
                             }
                             composable("reports"){
@@ -144,7 +144,7 @@ class MainActivity : ComponentActivity() {
                                         .fillMaxSize()
                                         .padding(innerPadding)
                                 ) {
-                                   Add( navController)
+                                    Add( navController)
                                 }
                             }
 
@@ -163,13 +163,13 @@ class MainActivity : ComponentActivity() {
                                         .fillMaxSize()
                                         .padding(innerPadding)
                                 ) {
-                                   Categories(navController = navController)
+                                    Categories(navController = navController)
                                 }
                             }
                         }
-                    } 
-                       
-                    
+                    }
+
+
                 )
 
 

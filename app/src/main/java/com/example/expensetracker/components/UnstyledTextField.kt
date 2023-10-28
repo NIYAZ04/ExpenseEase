@@ -1,4 +1,4 @@
-package com.example.expensetracker.Components
+package com.example.expensetracker.components
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*

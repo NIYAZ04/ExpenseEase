@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import java.time.LocalDate
 
+
 data class AddScreenState(
 
     val amount:String="",
@@ -37,8 +38,8 @@ class AddViewModel: ViewModel (){
     fun setDate(date:LocalDate){
         _uiState.update { currentState->
             currentState.copy(
-                      date=date,
-                )
+                date=date,
+            )
         }
     }
     fun setNote(note: String) {
@@ -51,7 +52,7 @@ class AddViewModel: ViewModel (){
     fun setCategory(category: String){
         _uiState.update { currentState->
             currentState.copy(
-               category = category,
+                category = category,
             )
         }
     }

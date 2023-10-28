@@ -44,8 +44,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.expensetracker.Components.TableRow
-import com.example.expensetracker.Components.UnstyledTextField
+import com.example.expensetracker.components.TableRow
+import com.example.expensetracker.components.UnstyledTextField
 import com.example.expensetracker.models.Recurrence
 import com.example.expensetracker.ui.theme.BackgroundElevated
 import com.example.expensetracker.ui.theme.DividerColor
@@ -207,7 +207,7 @@ fun Add(navController:NavController, vm: AddViewModel= viewModel())
 
                         TextButton(onClick = { categoriesMenuOpened=true }, shape = Shapes.large
 
-                        )// error might contain
+                        )
                         {
                             Text(state.category ?:"Select a Category ")
                             DropdownMenu(expanded =categoriesMenuOpened ,
@@ -239,7 +239,7 @@ fun Add(navController:NavController, vm: AddViewModel= viewModel())
                     }
                     )
                 }
-            
+
             Button(onClick = { /*TODO*/ },
                 modifier=Modifier.padding(16.dp),
                 shape = Shapes.large

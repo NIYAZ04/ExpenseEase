@@ -1,4 +1,4 @@
-package com.example.expensetracker.Components
+package com.example.expensetracker.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -28,7 +28,7 @@ fun TableRow( modifier:Modifier=Modifier,label:String ? =null, hasArrow:Boolean 
     Row (
         modifier= modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp,),
+            .padding(horizontal = 16.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
 
