@@ -28,6 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.expensetracker.pages.Add
 import com.example.expensetracker.pages.Categories
 import com.example.expensetracker.pages.Expenses
+import com.example.expensetracker.pages.Reports
 import com.example.expensetracker.pages.Settings
 import com.example.expensetracker.ui.theme.ExpenseTrackerTheme
 import com.example.expensetracker.ui.theme.TopAppBarBackground
@@ -134,7 +135,7 @@ class MainActivity : ComponentActivity() {
                                         .fillMaxSize()
                                         .padding(innerPadding)
                                 ) {
-                                    Greeting(name = "reports")
+                                   Reports()
                                 }
                             }
 

@@ -37,7 +37,7 @@ fun Settings(navController: NavController){
             )
         },
         content = {innerPadding->
-            Column(modifier= Modifier.padding(innerPadding))
+            Column(modifier= Modifier.padding(innerPadding).padding(top=25.dp))
             {
                 Column ( modifier= Modifier
                     .padding(horizontal = 16.dp)

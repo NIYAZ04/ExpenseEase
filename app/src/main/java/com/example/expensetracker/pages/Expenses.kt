@@ -71,7 +71,8 @@ fun Expenses(
             Column(
                 modifier = Modifier
                     .padding(innerPadding)
-                    .padding(16.dp)
+                    .padding(horizontal= 16.dp)
+                    .padding(top=16.dp)
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -97,7 +98,7 @@ fun Expenses(
                 }
                 Row(modifier = Modifier.padding(vertical = 32.dp)) {
                     Text(
-                        "$",
+                        "Rs",
                         style = MaterialTheme.typography.bodyMedium,
                         color = LabelSecondary,
                         modifier = Modifier.padding(end = 4.dp, top = 4.dp)

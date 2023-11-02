@@ -2,6 +2,7 @@ package com.example.expensetracker.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -21,7 +22,7 @@ fun ExpensesDayGroup(
     Column(modifier = modifier) {
         Text(
             date.formatDay(),
-            style = Typography.headlineMedium,
+            style = MaterialTheme.typography.headlineMedium,
             color = LabelSecondary
         )
         Divider(modifier = Modifier.padding(top = 10.dp, bottom = 4.dp))
@@ -36,10 +37,10 @@ fun ExpensesDayGroup(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text("Total:", style = Typography.bodyMedium, color = LabelSecondary)
+            Text("Total:", style = MaterialTheme.typography.bodyMedium, color = LabelSecondary)
             Text(
                 DecimalFormat("IND 0.#").format(dayExpenses.total),
-                style = Typography.headlineMedium,
+                style = MaterialTheme.typography.headlineMedium,
                 color = LabelSecondary
             )
         }

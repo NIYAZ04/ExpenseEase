@@ -83,7 +83,8 @@ fun Add(navController:NavController, vm: AddViewModel= viewModel())
                 .mediumTopAppBarColors(containerColor = TopAppBarBackground))
         },
         content = {innerPadding->
-            Column(modifier= Modifier.padding(innerPadding),
+            Column(modifier= Modifier.padding(innerPadding).padding(top=25.dp),
+
                 horizontalAlignment = Alignment.CenterHorizontally
 
             ) {

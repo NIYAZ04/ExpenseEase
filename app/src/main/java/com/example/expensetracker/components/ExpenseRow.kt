@@ -1,6 +1,7 @@
 package com.example.expensetracker.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,11 +21,11 @@ fun ExpenseRow(expense: Expense, modifier: Modifier = Modifier) {
         ) {
             Text(
                 expense.note ?: expense.category.name,
-                style = Typography.headlineMedium
+                style = MaterialTheme.typography.headlineMedium
             )
             Text(
                 "INR ${DecimalFormat("0.#").format(expense.amount)}",
-                style = Typography.headlineMedium
+                style = MaterialTheme.typography.headlineMedium
             )
         }
         Row(
@@ -36,7 +37,7 @@ fun ExpenseRow(expense: Expense, modifier: Modifier = Modifier) {
             CategoryBadge(category = expense.category)
             Text(
                 expense.date.format(DateTimeFormatter.ofPattern("HH:mm")),
-                style = Typography.bodyMedium,
+                style = MaterialTheme.typography.bodyMedium,
                 color = LabelSecondary
             )
         }
