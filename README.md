@@ -18,4 +18,4 @@ ExpenseEase is a mobile application developed using Android Studio, Kotlin, and 
 
 ## Development Status
 
-ExpenseTracker is currently under active development. I am ontinuously working to enhance its features, improve user experience, and fix any known issues. The app will be available on the playstore very soon.
+ExpenseEase is currently under active development. I am ontinuously working to enhance its features, improve user experience, and fix any known issues. The app will be available on the playstore very soon.
