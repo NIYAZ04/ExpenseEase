@@ -104,5 +104,12 @@ dependencies {
 // chart Dependency
 implementation("com.github.tehras:charts:0.2.4-alpha")
 
+    // lets check
+    implementation ("com.github.skydoves:colorpicker-compose:1.0.0")
+    implementation ("me.saket.swipe:swipe:1.0.0")
+    implementation ("io.github.serpro69:kotlin-faker:1.13.0")
+
+    implementation ("com.google.accompanist:accompanist-pager:0.29.1-alpha")
+
 }
 

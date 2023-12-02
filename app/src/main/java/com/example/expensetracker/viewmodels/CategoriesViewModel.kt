@@ -58,7 +58,7 @@ class CategoriesViewModel : ViewModel() {
     }
 
     fun createNewCategory() {
-        // TODO: save new category to local db
+
         val newCategoriesList = mutableListOf(
             Category(
                 _uiState.value.newCategoryName,

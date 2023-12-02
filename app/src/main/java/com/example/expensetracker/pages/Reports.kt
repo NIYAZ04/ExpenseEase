@@ -1,92 +1,78 @@
 package com.example.expensetracker.pages
-
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MediumTopAppBar
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.example.expensetracker.charts.WeeklyChart
-import com.example.expensetracker.expensesList.ExpensesList
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.example.expensetracker.R
+import com.example.expensetracker.components.ReportPage
+import com.example.expensetracker.components.charts.MonthlyChart
+
 import com.example.expensetracker.mock.mockExpenses
+import com.example.expensetracker.models.Recurrence
 import com.example.expensetracker.ui.theme.LabelSecondary
 import com.example.expensetracker.ui.theme.TopAppBarBackground
+import com.example.expensetracker.ui.theme.Typography
+import com.example.expensetracker.viewmodels.ReportsViewModel
+import java.time.LocalDate
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
 @Composable
-fun Reports(){
+fun Reports(vm: ReportsViewModel = viewModel()) {
+    val uiState = vm.uiState.collectAsState().value
+
+    val recurrences = listOf(
+        Recurrence.Weekly,
+        Recurrence.Monthly,
+        Recurrence.Yearly
+    )
+
     Scaffold(
         topBar = {
             MediumTopAppBar(
                 title = { Text("Reports") },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
                     containerColor = TopAppBarBackground
-                )
+                ),
+                actions = {
+                    IconButton(onClick = vm::openRecurrenceMenu) {
+                        Icon(
+                            painterResource(id = R.drawable.ic_today),
+                            contentDescription = "Change recurrence"
+                        )
+                    }
+                    DropdownMenu(
+                        expanded = uiState.recurrenceMenuOpened,
+                        onDismissRequest = vm::closeRecurrenceMenu
+                    ) {
+                        recurrences.forEach { recurrence ->
+                            DropdownMenuItem(text = { Text(recurrence.name) }, onClick = {
+                                vm.setRecurrence(recurrence)
+                                vm.closeRecurrenceMenu()
+                            })
+                        }
+                    }
+                }
             )
         },
         content = { innerPadding ->
-            Column(
-                modifier = Modifier
-                    .padding(innerPadding)
-                    .padding(16.dp)
-                    .padding(top = 16.dp)
-                    .fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-
-                Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                    Column {
-                        Text ("12 - Sep - 18 - sep",style=MaterialTheme.typography.titleMedium)
-                        Row (modifier=Modifier.padding(top=4.dp)){
-                            Text("INR",style=MaterialTheme.typography.bodyMedium,color= LabelSecondary,modifier = Modifier.padding(end=4.dp))
-                            Text("85",style=MaterialTheme.typography.headlineMedium)
-                        }
-
-                    }
-                    Column(horizontalAlignment = Alignment.End) {
-                        Text("Avg/day", style = MaterialTheme.typography.titleSmall)
-                        Row(modifier = Modifier.padding(top = 4.dp)) {
-                            Text(
-                                "INR",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = LabelSecondary,
-                                modifier = Modifier.padding(end = 4.dp)
-                            )
-                            Text("85", style = MaterialTheme.typography.headlineMedium)
-                        }
-                    }
-                }
-
-
-                //chart
-
-                Box(modifier = Modifier.padding(vertical=16.dp)) {
-                    WeeklyChart(expenses = mockExpenses)
-                }
-
-
-              ExpensesList(
-                  expenses = mockExpenses,
-                  modifier= Modifier
-                      .weight(1f)
-                      .verticalScroll(
-                          rememberScrollState()
-                      ))
+            val numOfPages = when (uiState.recurrence) {
+                Recurrence.Weekly -> 53
+                Recurrence.Monthly -> 12
+                Recurrence.Yearly -> 1
+                else -> 53
             }
-
+            HorizontalPager(count = numOfPages, reverseLayout = true) { page ->
+                ReportPage(innerPadding, page, uiState.recurrence)
+            }
         }
     )
 }

@@ -44,6 +44,8 @@ class MainActivity : ComponentActivity() {
 
                 var showButtomBar by rememberSaveable { mutableStateOf(true) }
 
+                // Mir Niyazul Haque
+
                 showButtomBar= when (backStackEntry?.destination?.route){
                     "Settings/Categories"-> false
                     else ->true
@@ -179,15 +181,12 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(text = "Hello $name")
-}
+
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     ExpenseTrackerTheme {
-        Greeting("Android")
+     
     }
 }
