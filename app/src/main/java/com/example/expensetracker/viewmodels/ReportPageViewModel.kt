@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.expensetracker.mock.mockExpenses
 import com.example.expensetracker.models.Expense
 import com.example.expensetracker.models.Recurrence
+import com.example.expensetracker.utils.calculateDateRange
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,56 +16,27 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.YearMonth
-
 data class State(
-    val expenses: List<Expense> = mockExpenses,
-    val dateStart: LocalDateTime = LocalDateTime.now(),
-    val dateEnd: LocalDateTime = LocalDateTime.now(),
-    val avgPerDay: Double = 0.0,
-    val totalInRange: Double = 0.0
+        val expenses: List<Expense> = mockExpenses,
+        val dateStart: LocalDateTime = LocalDateTime.now(),
+        val dateEnd: LocalDateTime = LocalDateTime.now(),
+        val avgPerDay: Double = 0.0,
+        val totalInRange: Double = 0.0
 )
 
 class ReportPageViewModel(private val page: Int, val recurrence: Recurrence) :
-    ViewModel() {
+        ViewModel() {
     private val _uiState = MutableStateFlow(State())
     val uiState: StateFlow<State> = _uiState.asStateFlow()
 
-    private lateinit var start: LocalDate
-    private lateinit var end: LocalDate
-    private var daysInRange = 1
-
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val today = LocalDate.now()
-            when (recurrence) {
-                Recurrence.Weekly -> {
-                    start =
-                        LocalDate.now().minusDays(today.dayOfWeek.value.toLong() - 1)
-                            .minusDays((page * 7).toLong())
-                    end = start.plusDays(6)
-                    daysInRange = 7
-                }
-                Recurrence.Monthly -> {
-                    start =
-                        LocalDate.of(today.year, today.month, 1)
-                            .minusMonths(page.toLong())
-                    val numberOfDays =
-                        YearMonth.of(start.year, start.month).lengthOfMonth()
-                    end = start.plusDays(numberOfDays.toLong())
-                    daysInRange = numberOfDays
-                }
-                Recurrence.Yearly -> {
-                    start = LocalDate.of(today.year, 1, 1)
-                    end = LocalDate.of(today.year, 12, 31)
-                    daysInRange = 365
-                }
-                else -> Unit
-            }
+            val (start, end, daysInRange) = calculateDateRange(recurrence, page)
 
             val filteredExpenses = mockExpenses.filter { expense ->
                 (expense.date.toLocalDate().isAfter(start) && expense.date.toLocalDate()
-                    .isBefore(end)) || expense.date.toLocalDate()
-                    .isEqual(start) || expense.date.toLocalDate().isEqual(end)
+                        .isBefore(end)) || expense.date.toLocalDate()
+                        .isEqual(start) || expense.date.toLocalDate().isEqual(end)
             }
 
             val totalExpensesAmount = filteredExpenses.sumOf { it.amount }
@@ -73,11 +45,11 @@ class ReportPageViewModel(private val page: Int, val recurrence: Recurrence) :
             viewModelScope.launch(Dispatchers.Main) {
                 _uiState.update { currentState ->
                     currentState.copy(
-                        dateStart = LocalDateTime.of(start, LocalTime.MIN),
-                        dateEnd = LocalDateTime.of(end, LocalTime.MAX),
-                        expenses = filteredExpenses,
-                        avgPerDay = avgPerDay,
-                        totalInRange = totalExpensesAmount
+                            dateStart = LocalDateTime.of(start, LocalTime.MIN),
+                            dateEnd = LocalDateTime.of(end, LocalTime.MAX),
+                            expenses = filteredExpenses,
+                            avgPerDay = avgPerDay,
+                            totalInRange = totalExpensesAmount
                     )
                 }
             }

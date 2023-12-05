@@ -39,18 +39,19 @@ import com.example.expensetracker.ui.theme.ExpenseTrackerTheme
 import com.example.expensetracker.ui.theme.LabelSecondary
 import com.example.expensetracker.ui.theme.TopAppBarBackground
 import com.example.expensetracker.viewmodels.ExpensesViewModel
+import java.text.DecimalFormat
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Expenses(
-    navController: NavController,
-    vm: ExpensesViewModel = viewModel()
+        navController: NavController,
+        vm: ExpensesViewModel = viewModel()
 ) {
     val recurrences = listOf(
-        Recurrence.Daily,
-        Recurrence.Weekly,
-        Recurrence.Monthly,
-        Recurrence.Yearly
+            Recurrence.Daily,
+            Recurrence.Weekly,
+            Recurrence.Monthly,
+            Recurrence.Yearly
     )
 
     val state by vm.uiState.collectAsState()
@@ -59,62 +60,65 @@ fun Expenses(
     }
 
     Scaffold(
-        topBar = {
-            MediumTopAppBar(
-                title = { Text("Expenses") },
-                colors = TopAppBarDefaults.mediumTopAppBarColors(
-                    containerColor = TopAppBarBackground
-                )
-            )
-        },
-        content = { innerPadding ->
-            Column(
-                modifier = Modifier
-                    .padding(innerPadding)
-                    .padding(horizontal= 16.dp)
-                    .padding(top=16.dp)
-                    .fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(
-                        "Total for:",
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
-                    PickerTrigger(
-                        state.recurrence.target ?: Recurrence.None.target,
-                        onClick = { recurrenceMenuOpened = !recurrenceMenuOpened },
-                        modifier = Modifier.padding(start = 16.dp)
-                    )
-                    DropdownMenu(expanded = recurrenceMenuOpened,
-                        onDismissRequest = { recurrenceMenuOpened = false }) {
-                        recurrences.forEach { recurrence ->
-                            DropdownMenuItem(text = { Text(recurrence.target) }, onClick = {
-                                vm.setRecurrence(recurrence)
-                                recurrenceMenuOpened = false
-                            })
-                        }
-                    }
-                }
-                Row(modifier = Modifier.padding(vertical = 32.dp)) {
-                    Text(
-                        "Rs",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = LabelSecondary,
-                        modifier = Modifier.padding(end = 4.dp, top = 4.dp)
-                    )
-                    Text("${state.sumTotal}", style = MaterialTheme.typography.titleLarge)
-                }
-                ExpensesList(
-                    expenses = mockExpenses,
-                    modifier = Modifier
-                        .weight(1f)
-                        .verticalScroll(
-                            rememberScrollState()
+            topBar = {
+                MediumTopAppBar(
+                        title = { Text("Expenses") },
+                        colors = TopAppBarDefaults.mediumTopAppBarColors(
+                                containerColor = TopAppBarBackground
                         )
                 )
+            },
+            content = { innerPadding ->
+                Column(
+                        modifier = Modifier
+                                .padding(innerPadding)
+                                .padding(horizontal = 16.dp)
+                                .padding(top = 16.dp)
+                                .fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                                "Total for:",
+                                style = MaterialTheme.typography.bodyMedium,
+                        )
+                        PickerTrigger(
+                                state.recurrence.target ?: Recurrence.None.target,
+                                onClick = { recurrenceMenuOpened = !recurrenceMenuOpened },
+                                modifier = Modifier.padding(start = 16.dp)
+                        )
+                        DropdownMenu(expanded = recurrenceMenuOpened,
+                                onDismissRequest = { recurrenceMenuOpened = false }) {
+                            recurrences.forEach { recurrence ->
+                                DropdownMenuItem(text = { Text(recurrence.target) }, onClick = {
+                                    vm.setRecurrence(recurrence)
+                                    recurrenceMenuOpened = false
+                                })
+                            }
+                        }
+                    }
+                    Row(modifier = Modifier.padding(vertical = 32.dp)) {
+                        Text(
+                                "$",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = LabelSecondary,
+                                modifier = Modifier.padding(end = 4.dp, top = 4.dp)
+                        )
+                        Text(
+                                DecimalFormat("0.#").format(state.sumTotal),
+                                style =MaterialTheme.typography.titleLarge
+                        )
+                    }
+                    ExpensesList(
+                            expenses = state.expenses,
+                            modifier = Modifier
+                                    .weight(1f)
+                                    .verticalScroll(
+                                            rememberScrollState()
+                                    )
+                    )
+                }
             }
-        }
     )
 }
 

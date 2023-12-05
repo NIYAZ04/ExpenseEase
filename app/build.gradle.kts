@@ -1,10 +1,13 @@
 import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+import shadow.bundletool.com.android.tools.r8.internal.id
 
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id ("kotlin-kapt")
     id("com.google.devtools.ksp")
+
+    id ("io.sentry.android.gradle") version "4.0.0"
 }
 
 
@@ -53,6 +56,14 @@ android {
         }
     }
 }
+
+buildscript{
+    repositories{
+        mavenCentral()
+    }
+}
+
+
 
 dependencies {
 
@@ -110,6 +121,10 @@ implementation("com.github.tehras:charts:0.2.4-alpha")
     implementation ("io.github.serpro69:kotlin-faker:1.13.0")
 
     implementation ("com.google.accompanist:accompanist-pager:0.29.1-alpha")
+
+    //Adding Sentry implementation for performance Checking
+    implementation ("io.sentry:sentry-android:6.13.1")
+    implementation ("io.sentry:sentry-compose-android:6.13.1")
 
 }
 
