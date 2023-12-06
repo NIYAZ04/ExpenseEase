@@ -15,33 +15,33 @@ import java.text.DecimalFormat
 import java.time.LocalDate
 @Composable
 fun ExpensesDayGroup(
-    date: LocalDate,
-    dayExpenses: DayExpenses,
-    modifier: Modifier = Modifier
+        date: LocalDate,
+        dayExpenses: DayExpenses,
+        modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {
         Text(
-            date.formatDay(),
-            style = MaterialTheme.typography.headlineMedium,
-            color = LabelSecondary
+                date.formatDay(),
+                style = Typography.headlineMedium,
+                color = LabelSecondary
         )
         Divider(modifier = Modifier.padding(top = 10.dp, bottom = 4.dp))
         dayExpenses.expenses.forEach { expense ->
             ExpenseRow(
-                expense = expense,
-                modifier = Modifier.padding(top = 12.dp)
+                    expense = expense,
+                    modifier = Modifier.padding(top = 12.dp)
             )
         }
         Divider(modifier = Modifier.padding(top = 16.dp, bottom = 4.dp))
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text("Total:", style = MaterialTheme.typography.bodyMedium, color = LabelSecondary)
+            Text("Total:", style = Typography.bodyMedium, color = LabelSecondary)
             Text(
-                DecimalFormat("IND 0.#").format(dayExpenses.total),
-                style = MaterialTheme.typography.headlineMedium,
-                color = LabelSecondary
+                    DecimalFormat("INR 0.#").format(dayExpenses.total),
+                    style = Typography.headlineMedium,
+                    color = LabelSecondary
             )
         }
     }

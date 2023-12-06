@@ -16,29 +16,29 @@ import java.time.format.DateTimeFormatter
 fun ExpenseRow(expense: Expense, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                expense.note ?: expense.category.name,
-                style = MaterialTheme.typography.headlineMedium
+                    expense.note ?: expense.category!!.name,
+                    style = Typography.headlineMedium
             )
             Text(
-                "INR ${DecimalFormat("0.#").format(expense.amount)}",
-                style = MaterialTheme.typography.headlineMedium
+                    "INR ${DecimalFormat("0.#").format(expense.amount)}",
+                    style = Typography.headlineMedium
             )
         }
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 6.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
+                modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 6.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            CategoryBadge(category = expense.category)
+            CategoryBadge(category = expense.category!!)
             Text(
-                expense.date.format(DateTimeFormatter.ofPattern("HH:mm")),
-                style = MaterialTheme.typography.bodyMedium,
-                color = LabelSecondary
+                    expense.date.format(DateTimeFormatter.ofPattern("HH:mm")),
+                    style = Typography.bodyMedium,
+                    color = LabelSecondary
             )
         }
     }

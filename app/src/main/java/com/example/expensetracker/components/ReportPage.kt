@@ -19,7 +19,7 @@ import com.example.expensetracker.expensesList.ExpensesList
 import com.example.expensetracker.models.Recurrence
 import com.example.expensetracker.ui.theme.LabelSecondary
 import com.example.expensetracker.ui.theme.Typography
-import com.example.expensetracker.utils.formatDay
+
 import com.example.expensetracker.utils.formatDayForRange
 import com.example.expensetracker.viewmodels.ReportPageViewModel
 import com.example.expensetracker.viewmodels.viewModelFactory
@@ -28,42 +28,42 @@ import java.time.LocalDate
 
 @Composable
 fun ReportPage(
-    innerPadding: PaddingValues,
-    page: Int,
-    recurrence: Recurrence,
-    vm: ReportPageViewModel = viewModel(
-        key = "$page-${recurrence.name}",
-        factory = viewModelFactory {
-            ReportPageViewModel(page, recurrence)
-        })
+        innerPadding: PaddingValues,
+        page: Int,
+        recurrence: Recurrence,
+        vm: ReportPageViewModel = viewModel(
+                key = "$page-${recurrence.name}",
+                factory = viewModelFactory {
+                    ReportPageViewModel(page, recurrence)
+                })
 ) {
     val uiState = vm.uiState.collectAsState().value
 
     Column(
-        modifier = Modifier
-            .padding(innerPadding)
-            .padding(horizontal = 16.dp)
-            .padding(top = 16.dp)
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier
+                    .padding(innerPadding)
+                    .padding(horizontal = 16.dp)
+                    .padding(top = 16.dp)
+                    .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth()
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
         ) {
             Column {
                 Text(
-                    "${
-                        uiState.dateStart.formatDayForRange()
-                    } - ${uiState.dateEnd.formatDayForRange()}",
-                    style = Typography.titleSmall
+                        "${
+                            uiState.dateStart.formatDayForRange()
+                        } - ${uiState.dateEnd.formatDayForRange()}",
+                        style = Typography.titleSmall
                 )
                 Row(modifier = Modifier.padding(top = 4.dp)) {
                     Text(
-                        "INR",
-                        style = Typography.bodyMedium,
-                        color = LabelSecondary,
-                        modifier = Modifier.padding(end = 4.dp)
+                            "INR",
+                            style = Typography.bodyMedium,
+                            color = LabelSecondary,
+                            modifier = Modifier.padding(end = 4.dp)
                     )
                     Text(DecimalFormat("0.#").format(uiState.totalInRange), style = Typography.headlineMedium)
                 }
@@ -72,10 +72,10 @@ fun ReportPage(
                 Text("Avg/day", style = Typography.titleSmall)
                 Row(modifier = Modifier.padding(top = 4.dp)) {
                     Text(
-                        "INR",
-                        style = Typography.bodyMedium,
-                        color = LabelSecondary,
-                        modifier = Modifier.padding(end = 4.dp)
+                            "INR",
+                            style = Typography.bodyMedium,
+                            color = LabelSecondary,
+                            modifier = Modifier.padding(end = 4.dp)
                     )
                     Text(DecimalFormat("0.#").format(uiState.avgPerDay), style = Typography.headlineMedium)
                 }
@@ -83,15 +83,15 @@ fun ReportPage(
         }
 
         Box(
-            modifier = Modifier
-                .height(180.dp)
-                .padding(vertical = 16.dp)
+                modifier = Modifier
+                        .height(180.dp)
+                        .padding(vertical = 16.dp)
         ) {
             when (recurrence) {
                 Recurrence.Weekly -> WeeklyChart(expenses = uiState.expenses)
                 Recurrence.Monthly -> MonthlyChart(
-                    expenses = uiState.expenses,
-                    LocalDate.now()
+                        expenses = uiState.expenses,
+                        LocalDate.now()
                 )
                 Recurrence.Yearly -> YearlyChart(expenses = uiState.expenses)
                 else -> Unit
@@ -99,10 +99,10 @@ fun ReportPage(
         }
 
         ExpensesList(
-            expenses = uiState.expenses, modifier = Modifier
+                expenses = uiState.expenses, modifier = Modifier
                 .weight(1f)
                 .verticalScroll(
-                    rememberScrollState()
+                        rememberScrollState()
                 )
         )
     }

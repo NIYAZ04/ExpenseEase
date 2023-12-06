@@ -67,12 +67,12 @@ import me.saket.swipe.SwipeableActionsBox
 
 
 @OptIn(
-    ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class,
-
+        ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class,
+        ExperimentalAnimationApi::class
 )
 @Composable
 fun Categories(
-    navController: NavController, vm: CategoriesViewModel = viewModel()
+        navController: NavController, vm: CategoriesViewModel = viewModel()
 ) {
     val uiState by vm.uiState.collectAsState()
 
@@ -80,71 +80,71 @@ fun Categories(
 
     Scaffold(topBar = {
         MediumTopAppBar(title = { Text("Categories") },
-            colors = TopAppBarDefaults.mediumTopAppBarColors(
-                containerColor = TopAppBarBackground
-            ),
-            navigationIcon = {
-                Surface(
-                    onClick = navController::popBackStack,
-                    color = Color.Transparent,
-                ) {
-                    Row(modifier = Modifier.padding(vertical = 10.dp)) {
-                        Icon(
-                            Icons.Rounded.KeyboardArrowLeft, contentDescription = "Settings"
-                        )
-                        Text("Settings")
+                colors = TopAppBarDefaults.mediumTopAppBarColors(
+                        containerColor = TopAppBarBackground
+                ),
+                navigationIcon = {
+                    Surface(
+                            onClick = navController::popBackStack,
+                            color = Color.Transparent,
+                    ) {
+                        Row(modifier = Modifier.padding(vertical = 10.dp)) {
+                            Icon(
+                                    Icons.Rounded.KeyboardArrowLeft, contentDescription = "Settings"
+                            )
+                            Text("Settings")
+                        }
                     }
-                }
-            })
+                })
     }, content = { innerPadding ->
         Column(
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxHeight(),
-            verticalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                        .padding(innerPadding)
+                        .fillMaxHeight(),
+                verticalArrangement = Arrangement.SpaceBetween,
         ) {
             Column(modifier = Modifier.weight(1f)) {
                 AnimatedVisibility(visible = true) {
                     LazyColumn(
-                        modifier = Modifier
-                            .padding(16.dp)
-                            .clip(Shapes.large)
-                            .fillMaxWidth()
+                            modifier = Modifier
+                                    .padding(16.dp)
+                                    .clip(Shapes.large)
+                                    .fillMaxWidth()
                     ) {
                         itemsIndexed(
-                            uiState.categories,
-                            key = { _, category -> category.name }) { index, category ->
+                                uiState.categories,
+                                key = { _, category -> category.name }) { index, category ->
                             SwipeableActionsBox(
-                                endActions = listOf(
-                                    SwipeAction(
-                                        icon = painterResource(R.drawable.delete),
-                                        background = Destructive,
-                                        onSwipe = { vm.deleteCategory(category) }
+                                    endActions = listOf(
+                                            SwipeAction(
+                                                    icon = painterResource(R.drawable.delete),
+                                                    background = Destructive,
+                                                    onSwipe = { vm.deleteCategory(category) }
+                                            ),
                                     ),
-                                ),
-                                modifier = Modifier.animateItemPlacement()
+                                    modifier = Modifier.animateItemPlacement()
                             ) {
                                 TableRow(modifier = Modifier.background(BackgroundElevated)) {
                                     Row(
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        modifier = Modifier.padding(horizontal = 16.dp)
+                                            verticalAlignment = Alignment.CenterVertically,
+                                            modifier = Modifier.padding(horizontal = 16.dp)
                                     ) {
                                         Surface(
-                                            color = category.color,
-                                            shape = CircleShape,
-                                            border = BorderStroke(
-                                                width = 2.dp,
-                                                color = Color.White
-                                            ),
-                                            modifier = Modifier.size(16.dp)
+                                                color = category.color,
+                                                shape = CircleShape,
+                                                border = BorderStroke(
+                                                        width = 2.dp,
+                                                        color = Color.White
+                                                ),
+                                                modifier = Modifier.size(16.dp)
                                         ) {}
                                         Text(
-                                            category.name,
-                                            modifier = Modifier.padding(
-                                                horizontal = 16.dp,
-                                                vertical = 10.dp
-                                            ),
-                                            style = MaterialTheme.typography.bodyMedium
+                                                category.name,
+                                                modifier = Modifier.padding(
+                                                        horizontal = 16.dp,
+                                                        vertical = 10.dp
+                                                ),
+                                                style = MaterialTheme.typography.bodyMedium,
                                         )
                                     }
                                 }
@@ -152,9 +152,9 @@ fun Categories(
                             if (index < uiState.categories.size - 1) {
                                 Row(modifier = Modifier.background(BackgroundElevated).height(1.dp)) {
                                     Divider(
-                                        modifier = Modifier.padding(start = 16.dp),
-                                        thickness = 1.dp,
-                                        color = DividerColor
+                                            modifier = Modifier.padding(start = 16.dp),
+                                            thickness = 1.dp,
+                                            color = DividerColor
                                     )
                                 }
                             }
@@ -163,57 +163,50 @@ fun Categories(
                 }
             }
             Row(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp)
-                    .padding(bottom = 16.dp)
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier
+                            .padding(horizontal = 16.dp)
+                            .padding(bottom = 16.dp)
+                            .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 if (uiState.colorPickerShowing) {
                     Dialog(onDismissRequest = vm::hideColorPicker) {
                         Surface(color = BackgroundElevated, shape = Shapes.large) {
                             Column(
-                                modifier = Modifier.padding(all = 30.dp)
+                                    modifier = Modifier.padding(all = 30.dp)
                             ) {
                                 Text("Select a color", style = MaterialTheme.typography.titleLarge)
                                 Row(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(top = 24.dp),
-                                    horizontalArrangement = Arrangement.Center,
-                                    verticalAlignment = Alignment.CenterVertically
+                                        modifier = Modifier
+                                                .fillMaxWidth()
+                                                .padding(top = 24.dp),
+                                        horizontalArrangement = Arrangement.Center,
+                                        verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     AlphaTile(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .height(60.dp)
-                                            .clip(RoundedCornerShape(6.dp)),
-                                        controller = colorPickerController
+                                            modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .height(60.dp)
+                                                    .clip(RoundedCornerShape(6.dp)),
+                                            controller = colorPickerController
                                     )
                                 }
                                 HsvColorPicker(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .height(300.dp)
-                                        .padding(10.dp),
-                                    controller = colorPickerController,
-                                    onColorChanged = { envelope ->
-                                        vm.setNewCategoryColor(envelope.color)
-                                    },
-                                )
-                                BrightnessSlider(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(10.dp)
-                                        .height(35.dp),
-                                    controller = colorPickerController,
+                                        modifier = Modifier
+                                                .fillMaxWidth()
+                                                .height(300.dp)
+                                                .padding(10.dp),
+                                        controller = colorPickerController,
+                                        onColorChanged = { envelope ->
+                                            vm.setNewCategoryColor(envelope.color)
+                                        },
                                 )
                                 TextButton(
-                                    onClick = vm::hideColorPicker,
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(top = 24.dp),
+                                        onClick = vm::hideColorPicker,
+                                        modifier = Modifier
+                                                .fillMaxWidth()
+                                                .padding(top = 24.dp),
                                 ) {
                                     Text("Done")
                                 }
@@ -222,45 +215,45 @@ fun Categories(
                     }
                 }
                 Surface(
-                    onClick = vm::showColorPicker,
-                    shape = CircleShape,
-                    color = uiState.newCategoryColor,
-                    border = BorderStroke(
-                        width = 2.dp,
-                        color = Color.White
-                    ),
-                    modifier = Modifier.size(width = 24.dp, height = 24.dp)
+                        onClick = vm::showColorPicker,
+                        shape = CircleShape,
+                        color = uiState.newCategoryColor,
+                        border = BorderStroke(
+                                width = 2.dp,
+                                color = Color.White
+                        ),
+                        modifier = Modifier.size(width = 24.dp, height = 24.dp)
                 ) {}
                 Surface(
-                    color = BackgroundElevated,
-                    modifier = Modifier
-                        .height(44.dp)
-                        .weight(1f)
-                        .padding(start = 16.dp),
-                    shape = Shapes.large,
+                        color = BackgroundElevated,
+                        modifier = Modifier
+                                .height(44.dp)
+                                .weight(1f)
+                                .padding(start = 16.dp),
+                        shape = Shapes.large,
                 ) {
                     Column(
-                        verticalArrangement = Arrangement.Center,
-                        modifier = Modifier.fillMaxHeight()
+                            verticalArrangement = Arrangement.Center,
+                            modifier = Modifier.fillMaxHeight()
                     ) {
                         UnstyledTextField(
-                            value = uiState.newCategoryName,
-                            onValueChange = vm::setNewCategoryName,
-                            placeholder = { Text("Category name") },
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            maxLines = 1,
+                                value = uiState.newCategoryName,
+                                onValueChange = vm::setNewCategoryName,
+                                placeholder = { Text("Category name") },
+                                modifier = Modifier
+                                        .fillMaxWidth(),
+                                maxLines = 1,
                         )
                     }
                 }
                 IconButton(
-                    onClick = vm::createNewCategory,
-                    modifier = Modifier
-                        .padding(start = 16.dp)
+                        onClick = vm::createNewCategory,
+                        modifier = Modifier
+                                .padding(start = 16.dp)
                 ) {
                     Icon(
-                        Icons.Rounded.Send,
-                        "Create category"
+                            Icons.Rounded.Send,
+                            "Create category"
                     )
                 }
             }

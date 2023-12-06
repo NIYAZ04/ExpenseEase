@@ -28,15 +28,17 @@ fun ExpensesList(expenses: List<Expense>, modifier: Modifier = Modifier) {
             groupedExpenses.keys.forEach { date ->
                 if (groupedExpenses[date] != null) {
                     ExpensesDayGroup(
-                        date = date,
-                        dayExpenses = groupedExpenses[date]!!,
-                        modifier = Modifier.padding(top = 24.dp)
+                            date = date,
+                            dayExpenses = groupedExpenses[date]!!,
+                            modifier = Modifier.padding(top = 24.dp)
                     )
                 }
             }
         }
     }
 }
+
+
 
 @Preview(uiMode = UI_MODE_NIGHT_YES)
 @Composable

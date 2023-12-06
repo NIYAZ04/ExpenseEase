@@ -24,25 +24,25 @@ import com.example.expensetracker.ui.theme.Shapes
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PickerTrigger(
-    label: String,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
+        label: String,
+        onClick: () -> Unit,
+        modifier: Modifier = Modifier,
 ) {
     Surface(
-        shape = Shapes.medium,
-        color = FillTertiary,
-        modifier = modifier,
-        onClick = onClick,
+            shape = Shapes.medium,
+            color = FillTertiary,
+            modifier = modifier,
+            onClick = onClick,
     ) {
         Row(
-            modifier = Modifier.padding(horizontal = 20.dp, vertical = 3.dp),
-            verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(horizontal = 20.dp, vertical = 3.dp),
+                verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(label, style = MaterialTheme.typography.titleSmall)
             Icon(
-                painterResource(R.drawable.ic_unfold_more),
-                contentDescription = "Open picker",
-                modifier = Modifier.padding(start = 10.dp)
+                    painterResource(R.drawable.ic_unfold_more),
+                    contentDescription = "Open picker",
+                    modifier = Modifier.padding(start = 10.dp)
             )
         }
     }

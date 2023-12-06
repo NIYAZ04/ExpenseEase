@@ -27,28 +27,28 @@ fun MonthlyChart(expenses: List<Expense>, month: LocalDate) {
     val numberOfDays = YearMonth.of(month.year, month.month).lengthOfMonth()
 
     BarChart(
-        barChartData = BarChartData(
-            bars = buildList() {
-                for (i in 1..numberOfDays) {
-                    add(BarChartData.Bar(
-                        label = "$i",
-                        value = groupedExpenses[i]?.total?.toFloat()
-                            ?: 0f,
-                        color = Color.White,
-                    ))
-                }
-            }
-        ),
-        labelDrawer = LabelDrawer(recurrence = Recurrence.Monthly, lastDay = numberOfDays),
-        yAxisDrawer = SimpleYAxisDrawer(
-            labelTextColor = LabelSecondary,
-            labelValueFormatter = ::simplifyNumber,
-            labelRatio = 7,
-            labelTextSize = 14.sp
-        ),
-        barDrawer = BarDrawer(recurrence = Recurrence.Monthly),
-        modifier = Modifier
-            .padding(bottom = 20.dp)
-            .fillMaxSize()
+            barChartData = BarChartData(
+                    bars = buildList() {
+                        for (i in 1..numberOfDays) {
+                            add(BarChartData.Bar(
+                                    label = "$i",
+                                    value = groupedExpenses[i]?.total?.toFloat()
+                                            ?: 0f,
+                                    color = Color.White,
+                            ))
+                        }
+                    }
+            ),
+            labelDrawer = LabelDrawer(recurrence = Recurrence.Monthly, lastDay = numberOfDays),
+            yAxisDrawer = SimpleYAxisDrawer(
+                    labelTextColor = LabelSecondary,
+                    labelValueFormatter = ::simplifyNumber,
+                    labelRatio = 7,
+                    labelTextSize = 14.sp
+            ),
+            barDrawer = BarDrawer(recurrence = Recurrence.Monthly),
+            modifier = Modifier
+                    .padding(bottom = 20.dp)
+                    .fillMaxSize()
     )
 }

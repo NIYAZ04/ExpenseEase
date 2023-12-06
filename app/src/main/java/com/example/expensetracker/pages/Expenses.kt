@@ -99,14 +99,14 @@ fun Expenses(
                     }
                     Row(modifier = Modifier.padding(vertical = 32.dp)) {
                         Text(
-                                "$",
-                                style = MaterialTheme.typography.bodyMedium,
+                                "Rs",
+                                style =MaterialTheme.typography.bodyMedium,
                                 color = LabelSecondary,
                                 modifier = Modifier.padding(end = 4.dp, top = 4.dp)
                         )
                         Text(
                                 DecimalFormat("0.#").format(state.sumTotal),
-                                style =MaterialTheme.typography.titleLarge
+                                style = MaterialTheme.typography.titleLarge
                         )
                     }
                     ExpensesList(
@@ -121,6 +121,7 @@ fun Expenses(
             }
     )
 }
+
 
 @Preview(uiMode = UI_MODE_NIGHT_YES)
 @Composable

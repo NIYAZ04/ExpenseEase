@@ -10,7 +10,7 @@ import com.example.expensetracker.models.Recurrence
 import com.example.expensetracker.ui.theme.LabelSecondary
 
 class LabelDrawer(val recurrence: Recurrence, private val lastDay: Int? = -1) :
-    com.github.tehras.charts.bar.renderer.label.LabelDrawer {
+        com.github.tehras.charts.bar.renderer.label.LabelDrawer {
     private val leftOffset = when (recurrence) {
         Recurrence.Weekly -> 50f
         Recurrence.Monthly -> 13f
@@ -25,25 +25,25 @@ class LabelDrawer(val recurrence: Recurrence, private val lastDay: Int? = -1) :
     }
 
     override fun drawLabel(
-        drawScope: DrawScope,
-        canvas: Canvas,
-        label: String,
-        barArea: Rect,
-        xAxisArea: Rect
+            drawScope: DrawScope,
+            canvas: Canvas,
+            label: String,
+            barArea: Rect,
+            xAxisArea: Rect
     ) {
         val monthlyCondition =
-            recurrence == Recurrence.Monthly && (
-                    Integer.parseInt(label) % 5 == 0 ||
-                            Integer.parseInt(label) == 1 ||
-                            Integer.parseInt(label) == lastDay
-                    )
+                recurrence == Recurrence.Monthly && (
+                        Integer.parseInt(label) % 5 == 0 ||
+                                Integer.parseInt(label) == 1 ||
+                                Integer.parseInt(label) == lastDay
+                        )
 
         if (monthlyCondition || recurrence != Recurrence.Monthly)
             canvas.nativeCanvas.drawText(
-                label,
-                barArea.left + leftOffset,
-                barArea.bottom + 65f,
-                paint
+                    label,
+                    barArea.left + leftOffset,
+                    barArea.bottom + 65f,
+                    paint
             )
     }
 }

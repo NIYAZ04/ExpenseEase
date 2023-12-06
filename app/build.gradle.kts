@@ -6,7 +6,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id ("kotlin-kapt")
     id("com.google.devtools.ksp")
-
+    id ("io.realm.kotlin")
     id ("io.sentry.android.gradle") version "4.0.0"
 }
 
@@ -125,6 +125,11 @@ implementation("com.github.tehras:charts:0.2.4-alpha")
     //Adding Sentry implementation for performance Checking
     implementation ("io.sentry:sentry-android:6.13.1")
     implementation ("io.sentry:sentry-compose-android:6.13.1")
-
+// Realm Database Integration
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation ("io.realm.kotlin:library-base:1.6.0")
 }
+
+
+
 

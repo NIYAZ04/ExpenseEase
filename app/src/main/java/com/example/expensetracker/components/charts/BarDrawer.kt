@@ -10,7 +10,7 @@ import com.example.expensetracker.models.Recurrence
 import com.example.expensetracker.ui.theme.SystemGray04
 
 class BarDrawer constructor(recurrence: Recurrence) :
-    com.github.tehras.charts.bar.renderer.bar.BarDrawer {
+        com.github.tehras.charts.bar.renderer.bar.BarDrawer {
     private val barPaint = Paint().apply {
         this.isAntiAlias = true
     }
@@ -23,32 +23,32 @@ class BarDrawer constructor(recurrence: Recurrence) :
     }
 
     override fun drawBar(
-        drawScope: DrawScope,
-        canvas: Canvas,
-        barArea: Rect,
-        bar: BarChartData.Bar
+            drawScope: DrawScope,
+            canvas: Canvas,
+            barArea: Rect,
+            bar: BarChartData.Bar
     ) {
         canvas.drawRoundRect(
-            barArea.left,
-            0f,
-            barArea.right + rightOffset,
-            barArea.bottom,
-            16f,
-            16f,
-            barPaint.apply {
-                color = SystemGray04
-            },
+                barArea.left,
+                0f,
+                barArea.right + rightOffset,
+                barArea.bottom,
+                16f,
+                16f,
+                barPaint.apply {
+                    color = SystemGray04
+                },
         )
         canvas.drawRoundRect(
-            barArea.left,
-            barArea.top,
-            barArea.right + rightOffset,
-            barArea.bottom,
-            16f,
-            16f,
-            barPaint.apply {
-                color = bar.color
-            },
+                barArea.left,
+                barArea.top,
+                barArea.right + rightOffset,
+                barArea.bottom,
+                16f,
+                16f,
+                barPaint.apply {
+                    color = bar.color
+                },
         )
     }
 }

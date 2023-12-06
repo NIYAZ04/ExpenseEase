@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 data class ReportsState(
-    val recurrence: Recurrence = Recurrence.Weekly,
-    val recurrenceMenuOpened: Boolean = false
+        val recurrence: Recurrence = Recurrence.Weekly,
+        val recurrenceMenuOpened: Boolean = false
 )
 
 class ReportsViewModel: ViewModel() {
@@ -20,7 +20,7 @@ class ReportsViewModel: ViewModel() {
     fun setRecurrence(recurrence: Recurrence) {
         _uiState.update { currentState ->
             currentState.copy(
-                recurrence = recurrence
+                    recurrence = recurrence
             )
         }
     }
@@ -28,7 +28,7 @@ class ReportsViewModel: ViewModel() {
     fun openRecurrenceMenu() {
         _uiState.update { currentState ->
             currentState.copy(
-                recurrenceMenuOpened = true
+                    recurrenceMenuOpened = true
             )
         }
     }
@@ -36,7 +36,7 @@ class ReportsViewModel: ViewModel() {
     fun closeRecurrenceMenu() {
         _uiState.update { currentState ->
             currentState.copy(
-                recurrenceMenuOpened = false
+                    recurrenceMenuOpened = false
             )
         }
     }

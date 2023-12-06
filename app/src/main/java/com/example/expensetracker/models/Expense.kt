@@ -1,20 +1,44 @@
 package com.example.expensetracker.models
 
+import io.realm.kotlin.types.ObjectId
+import io.realm.kotlin.types.RealmObject
+import io.realm.kotlin.types.annotations.PrimaryKey
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-data class Expense(
-    val id: Int,
-    val amount: Double,
-    val recurrence: Recurrence,
-    val date: LocalDateTime,
-    val note: String?,
-    val category: Category,
-)
+
+class Expense(): RealmObject {
+    @PrimaryKey
+    var _id: ObjectId = ObjectId.create()
+    var amount: Double = 0.0
+
+    private var _recurrenceName: String = "None"
+    val recurrence: Recurrence get() { return _recurrenceName.toRecurrence() }
+
+    private var _dateValue: String = LocalDateTime.now().toString()
+    val date: LocalDateTime get() { return LocalDateTime.parse(_dateValue) }
+
+    var note: String = ""
+    var category: Category? = null
+
+    constructor(
+            amount: Double,
+            recurrence: Recurrence,
+            date: LocalDateTime,
+            note: String,
+            category: Category,
+    ) : this() {
+        this.amount = amount
+        this._recurrenceName = recurrence.name
+        this._dateValue = date.toString()
+        this.note = note
+        this.category = category
+    }
+}
 
 data class DayExpenses(
-    val expenses: MutableList<Expense>,
-    var total: Double,
+        val expenses: MutableList<Expense>,
+        var total: Double,
 )
 
 fun List<Expense>.groupedByDay(): Map<LocalDate, DayExpenses> {
@@ -25,8 +49,8 @@ fun List<Expense>.groupedByDay(): Map<LocalDate, DayExpenses> {
 
         if (dataMap[date] == null) {
             dataMap[date] = DayExpenses(
-                expenses = mutableListOf(),
-                total = 0.0
+                    expenses = mutableListOf(),
+                    total = 0.0
             )
         }
 
@@ -49,8 +73,8 @@ fun List<Expense>.groupedByDayOfWeek(): Map<String, DayExpenses> {
 
         if (dataMap[dayOfWeek.name] == null) {
             dataMap[dayOfWeek.name] = DayExpenses(
-                expenses = mutableListOf(),
-                total = 0.0
+                    expenses = mutableListOf(),
+                    total = 0.0
             )
         }
 
@@ -69,8 +93,8 @@ fun List<Expense>.groupedByDayOfMonth(): Map<Int, DayExpenses> {
 
         if (dataMap[dayOfMonth] == null) {
             dataMap[dayOfMonth] = DayExpenses(
-                expenses = mutableListOf(),
-                total = 0.0
+                    expenses = mutableListOf(),
+                    total = 0.0
             )
         }
 
@@ -89,8 +113,8 @@ fun List<Expense>.groupedByMonth(): Map<String, DayExpenses> {
 
         if (dataMap[month.name] == null) {
             dataMap[month.name] = DayExpenses(
-                expenses = mutableListOf(),
-                total = 0.0
+                    expenses = mutableListOf(),
+                    total = 0.0
             )
         }
 
